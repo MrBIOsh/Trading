@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/index.js"></script>
+    <title>Регистрация</title>
+</head>
+<body>    
+    <header class="header">
+        <div class="header__wrapper">
+            <div class="header__box">
+                <a href="#" class="header__logo"></a>                
+                <button type="button" class="header__burger"></button>
+                <nav class="header__navigation">
+                    <ul class="header__nav">
+                        <li class="header__list"><a href="#" class="header__link">О нас</a></li>
+                        <li class="header__list"><a href="#" class="header__link">Инвестрировать</a></li>
+                        <li class="header__list"><a href="#" class="header__link">Главная</a></li>
+                        <li class="header__list"><a href="#" class="header__link">Новостной блог</a></li>
+                        <li class="header__list"><a href="#" class="header__link">Контакты</a></li>
+                    </ul>
+                </nav>
+                <button class="header__logIn" type="button"></button>
+            </div>
+        </div>
+    </header>   
+    <main class="main">
+    </main>    
+    <div id="popup" class="reg">
+        <div class="reg__wrapper">
+            <div class="reg__bg"></div>
+            <div class="reg__box">                
+                <button class="reg__btn-close" type="button"></button>
+                <form action="#" class="reg__form" id="form">
+                    <input class="reg__input login" type="text" placeholder="Login...">
+                    <input class="reg__input password" type="password">
+                    <button class="reg__button">Зарегистрироваться</button>
+                    <button class="reg__button">Log in with E-mail</button>
+                </form>
+                <a href="#" class="reg__account">Уже есть аккаунт</a>
+            </div>
+        </div>
+    </div>    
+    <div class="shadow" id="shadow"></div>
+    <script>
+    const regBtn = document.querySelector('.header__logIn');
+    const regBtnClose = document.querySelector('.reg__btn-close');
+    const darkLayer = document.getElementById('shadow');
+    const regWin = document.getElementById('popup');
+
+    //PopUp
+
+    if (regBtn) {  
+        regBtn.addEventListener('click', () => {    
+            regWin.style.visibility = 'visible';
+            regWin.style.transform = 'scale(1)';
+            darkLayer.style.opacity = '.8';
+            darkLayer.style.zIndex = '3';
+            document.addEventListener('wheel', prevent, {passive: false});
+            document.addEventListener('touchmove', prevent, {passive: false});
+        })
+    }
+
+    if (regBtnClose) {
+        regBtnClose.addEventListener('click', () => {
+            regWin.style.visibility = 'hidden';
+            regWin.style.transform = 'scale(0)';
+            darkLayer.style.opacity = '0';
+            darkLayer.style.zIndex = '-10';
+            document.removeEventListener('wheel', prevent);
+            document.removeEventListener('touchmove', prevent);
+        })
+    }
+
+    if (darkLayer) {
+        darkLayer.addEventListener('click', (evt) => {
+        if (!evt.composedPath().includes(regWin)) {
+            regWin.style.visibility = 'hidden';
+            regWin.style.transform = 'scale(0)';
+            darkLayer.style.opacity = '0';
+            darkLayer.style.zIndex = '-10';
+            document.removeEventListener('wheel', prevent);
+            document.removeEventListener('touchmove', prevent);
+            }
+        })
+    }
+    </script>
+</body>
+</html>
